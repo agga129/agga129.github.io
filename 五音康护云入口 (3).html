@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>五音康护云 - 您的专属康护精灵</title>
+<script src="https://cdn.tailwindcss.com/3.4.16"></script>
+<script>tailwind.config={theme:{extend:{colors:{primary:'#2c5f2d',secondary:'#b19d61'},borderRadius:{'none':'0px','sm':'4px',DEFAULT:'8px','md':'12px','lg':'16px','xl':'20px','2xl':'24px','3xl':'32px','full':'9999px','button':'8px'}}}}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
+<style>
+:where([class^="ri-"])::before { content: "\f3c2"; }
+body {
+font-family: 'Noto Serif SC', serif;
+background-color: #f9f7f3;
+}
+.hero-bg {
+background-image: url('https://readdy.ai/api/search-image?query=Traditional%20Chinese%20medicine%20background%20with%20elegant%20ink%20painting%20style%2C%20featuring%20musical%20notes%2C%20herbal%20elements%2C%20and%20five%20elements%20symbols.%20Soft%20green%20and%20gold%20color%20palette%20with%20white%20space%20for%20text.%20Artistic%20and%20serene%20composition%20suitable%20for%20a%20wellness%20platform.&width=1920&height=1080&seq=12345&orientation=landscape');
+background-size: cover;
+background-position: center;
+}
+.card-hover:hover {
+transform: translateY(-5px);
+box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+.music-player::-webkit-slider-thumb {
+-webkit-appearance: none;
+appearance: none;
+width: 18px;
+height: 18px;
+border-radius: 50%;
+background: #b19d61;
+cursor: pointer;
+}
+.music-player::-moz-range-thumb {
+width: 18px;
+height: 18px;
+border-radius: 50%;
+background: #b19d61;
+cursor: pointer;
+}
+</style>
+</head>
+<body>
+<!-- 首页部分 -->
+<div class="min-h-screen flex flex-col">
+<header class="w-full bg-white/90 shadow-sm py-4 px-8 fixed top-0 z-50">
+<div class="container mx-auto flex justify-between items-center">
+<div class="flex items-center">
+<img src="https://static.readdy.ai/image/9c02a12e4b469d0e3e20b1ad502c6a4d/bb3bd52eb53618beea6612ef4775e8fa.png" alt="logo" class="h-12 mr-2">
+<h1 class="text-2xl font-medium text-primary">五音康护云</h1>
+</div>
+<nav class="hidden md:flex space-x-8">
+<a href="#" class="text-gray-700 hover:text-primary transition-colors">首页</a>
+<a href="#" class="text-gray-700 hover:text-primary transition-colors">关于我们</a>
+<a href="#" class="text-gray-700 hover:text-primary transition-colors">课程体系</a>
+<a href="#" class="text-gray-700 hover:text-primary transition-colors">联系方式</a>
+</nav>
+<div class="flex items-center space-x-4">
+<button class="px-4 py-2 text-primary border border-primary hover:bg-primary hover:text-white transition-colors !rounded-button whitespace-nowrap">登录</button>
+<button class="px-4 py-2 bg-primary text-white hover:bg-primary/90 transition-colors !rounded-button whitespace-nowrap">注册</button>
+</div>
+</div>
+</header>
+<section class="flex-grow flex items-center justify-center pt-20 relative" style="background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(255,248,225,0.95) 100%), url('https://static.readdy.ai/image/9c02a12e4b469d0e3e20b1ad502c6a4d/bb3bd52eb53618beea6612ef4775e8fa.png') center/cover;">
+<div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+<img src="https://static.readdy.ai/image/9c02a12e4b469d0e3e20b1ad502c6a4d/bb3bd52eb53618beea6612ef4775e8fa.png" alt="background logo" class="w-96 h-96 object-contain opacity-30">
+</div>
+<div class="container mx-auto px-4 py-20 text-center">
+<div class="max-w-4xl mx-auto p-12 bg-white/95 rounded-2xl shadow-xl backdrop-blur-sm">
+<h2 class="text-[52px] text-primary mb-8 relative inline-block" style="font-family: 'Ma Shan Zheng', cursive; letter-spacing: 0.15em; line-height: 1.6;">
+<span class="relative z-10">您的专属康护精灵</span>
+<span class="absolute bottom-0 left-0 w-full h-3 bg-secondary/20 -z-10 transform -rotate-1"></span>
+</h2>
+<p class="text-xl text-gray-700 mb-12 max-w-2xl mx-auto">融合传统五音疗法与现代科技，为您提供个性化的中医康养体验，守护您的身心健康。</p>
+<button id="enter-btn" class="px-8 py-4 bg-primary text-white text-xl hover:bg-primary/90 transition-all transform hover:scale-105 !rounded-button whitespace-nowrap shadow-lg">开启康护之旅</button>
+</div>
+</div>
+</section>
+</div>
+<!-- 主功能页面 -->
+<div id="main-content" class="hidden min-h-screen bg-[url('https://readdy.ai/api/search-image?query=Light%20subtle%20background%20with%20traditional%20Chinese%20medicine%20elements%20and%20musical%20notes%20in%20very%20light%20watercolor%20style%2C%20predominantly%20white%20with%20hints%20of%20pale%20green%20and%20gold%2C%20perfect%20for%20a%20wellness%20platform%20interface.&width=1920&height=1080&seq=67890&orientation=landscape')] bg-cover bg-center pt-24 pb-16">
+<div class="container mx-auto px-4">
+<h2 class="text-4xl font-bold text-center text-primary mb-16">五音康护云平台</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+<!-- 左侧：五音公益平台 -->
+<div class="bg-white/90 backdrop-blur-sm p-8 rounded-2xl shadow-lg">
+<div class="flex items-center mb-6">
+<div class="w-12 h-12 flex items-center justify-center bg-primary/10 rounded-full mr-4 relative">
+<i class="ri-music-2-line text-primary text-2xl"></i>
+<i class="ri-music-fill text-primary text-sm absolute -top-1 -right-1"></i>
+</div>
+<h3 class="text-2xl font-bold text-primary">五音公益平台</h3>
+</div>
+<!-- 数字工坊 -->
+<div class="mb-10">
+<div class="flex items-center mb-4">
+<div class="w-8 h-8 flex items-center justify-center bg-secondary/20 rounded-full mr-3">
+<i class="ri-book-open-line text-secondary"></i>
+</div>
+<h4 class="text-xl font-medium text-gray-800">数字工坊</h4>
+</div>
+<div class="bg-gray-50 p-5 rounded-xl mb-4">
+<div class="flex space-x-4 mb-4 overflow-x-auto pb-2">
+<button class="px-4 py-2 bg-primary text-white !rounded-button whitespace-nowrap">全部课程</button>
+<button class="px-4 py-2 bg-white border border-gray-200 text-gray-700 hover:bg-gray-100 !rounded-button whitespace-nowrap">五音基础</button>
+<button class="px-4 py-2 bg-white border border-gray-200 text-gray-700 hover:bg-gray-100 !rounded-button whitespace-nowrap">经络调理</button>
+<button class="px-4 py-2 bg-white border border-gray-200 text-gray-700 hover:bg-gray-100 !rounded-button whitespace-nowrap">情绪疗愈</button>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<div class="bg-white rounded-lg shadow-sm p-4 card-hover transition-all">
+<div class="h-32 rounded-md mb-3 overflow-hidden">
+<img src="https://readdy.ai/api/search-image?query=Traditional%20Chinese%20musical%20therapy%20session%20with%20guqin%20instrument%20and%20herbal%20elements%2C%20professional%20setting%20with%20calm%20atmosphere%2C%20soft%20lighting%2C%20elegant%20composition.&width=400&height=300&seq=11111&orientation=landscape" alt="五音疗法基础" class="w-full h-full object-cover object-top">
+</div>
+<h5 class="font-medium text-gray-800">五音疗法基础入门</h5>
+<p class="text-sm text-gray-500 mt-1">探索中医五音理论与实践应用</p>
+</div>
+<div class="bg-white rounded-lg shadow-sm p-4 card-hover transition-all">
+<div class="h-32 rounded-md mb-3 overflow-hidden">
+<img src="https://readdy.ai/api/search-image?query=Chinese%20medicine%20meridian%20therapy%20with%20musical%20elements%2C%20professional%20demonstration%20of%20acupressure%20points%20with%20traditional%20instruments%20nearby%2C%20educational%20setting.&width=400&height=300&seq=22222&orientation=landscape" alt="经络音乐调理" class="w-full h-full object-cover object-top">
+</div>
+<h5 class="font-medium text-gray-800">经络音乐调理技法</h5>
+<p class="text-sm text-gray-500 mt-1">音乐与经络结合的康复方法</p>
+</div>
+</div>
+</div>
+<button class="w-full py-2 text-secondary hover:text-primary transition-colors flex items-center justify-center !rounded-button whitespace-nowrap">
+<span>查看更多课程</span>
+<i class="ri-arrow-right-line ml-1"></i>
+</button>
+</div>
+<!-- 云预约 -->
+<div>
+<div class="flex items-center mb-4">
+<div class="w-8 h-8 flex items-center justify-center bg-secondary/20 rounded-full mr-3">
+<i class="ri-calendar-check-line text-secondary"></i>
+</div>
+<h4 class="text-xl font-medium text-gray-800">云预约</h4>
+</div>
+<div class="bg-gray-50 p-5 rounded-xl">
+<div class="grid grid-cols-7 gap-1 mb-4">
+<div class="text-center text-sm text-gray-500">一</div>
+<div class="text-center text-sm text-gray-500">二</div>
+<div class="text-center text-sm text-gray-500">三</div>
+<div class="text-center text-sm text-gray-500">四</div>
+<div class="text-center text-sm text-gray-500">五</div>
+<div class="text-center text-sm text-gray-500">六</div>
+<div class="text-center text-sm text-gray-500">日</div>
+<div class="text-center py-2 text-gray-400">28</div>
+<div class="text-center py-2 text-gray-400">29</div>
+<div class="text-center py-2 text-gray-400">30</div>
+<div class="text-center py-2">1</div>
+<div class="text-center py-2">2</div>
+<div class="text-center py-2">3</div>
+<div class="text-center py-2">4</div>
+<div class="text-center py-2">5</div>
+<div class="text-center py-2">6</div>
+<div class="text-center py-2">7</div>
+<div class="text-center py-2">8</div>
+<div class="text-center py-2">9</div>
+<div class="text-center py-2">10</div>
+<div class="text-center py-2">11</div>
+<div class="text-center py-2">12</div>
+<div class="text-center py-2">13</div>
+<div class="text-center py-2">14</div>
+<div class="text-center py-2">15</div>
+<div class="text-center py-2">16</div>
+<div class="text-center py-2">17</div>
+<div class="text-center py-2">18</div>
+<div class="text-center py-2">19</div>
+<div class="text-center py-2">20</div>
+<div class="text-center py-2 bg-primary/10 rounded-full font-medium text-primary">21</div>
+<div class="text-center py-2">22</div>
+<div class="text-center py-2">23</div>
+<div class="text-center py-2">24</div>
+<div class="text-center py-2">25</div>
+</div>
+<div class="bg-white p-4 rounded-lg shadow-sm mb-4">
+<h5 class="font-medium text-gray-800 mb-2">2025年4月21日 可预约课程</h5>
+<div class="space-y-2">
+<div class="flex justify-between items-center p-2 hover:bg-gray-50 rounded">
+<div>
+<p class="font-medium">五音养生基础班</p>
+<p class="text-sm text-gray-500">09:00-10:30</p>
+</div>
+<button class="px-3 py-1 bg-secondary text-white text-sm !rounded-button whitespace-nowrap">预约</button>
+</div>
+<div class="flex justify-between items-center p-2 hover:bg-gray-50 rounded">
+<div>
+<p class="font-medium">即兴创作课程</p>
+<p class="text-sm text-gray-500">14:00-15:30</p>
+</div>
+<button class="px-3 py-1 bg-secondary text-white text-sm !rounded-button whitespace-nowrap">预约</button>
+</div>
+<div class="flex justify-between items-center p-2 hover:bg-gray-50 rounded">
+<div>
+<p class="font-medium">合唱课程</p>
+<p class="text-sm text-gray-500">19:00-20:30</p>
+</div>
+<button class="px-3 py-1 bg-gray-300 text-white text-sm cursor-not-allowed !rounded-button whitespace-nowrap">已满</button>
+</div>
+</div>
+</div>
+<button class="w-full py-2 text-secondary hover:text-primary transition-colors flex items-center justify-center !rounded-button whitespace-nowrap">
+<span>查看我的预约</span>
+<i class="ri-arrow-right-line ml-1"></i>
+</button>
+</div>
+</div>
+</div>
+<!-- 右侧：时空智能系统 -->
+<div class="bg-white/90 backdrop-blur-sm p-8 rounded-2xl shadow-lg">
+<div class="flex items-center mb-6">
+<div class="w-12 h-12 flex items-center justify-center bg-primary/10 rounded-full mr-4 relative">
+<i class="ri-music-2-line text-primary text-2xl"></i>
+<i class="ri-music-fill text-primary text-sm absolute -top-1 -right-1"></i>
+</div>
+<h3 class="text-2xl font-bold text-primary">时空智能系统</h3>
+</div>
+<!-- 时辰养生导航 -->
+<div class="mb-10">
+<div class="flex items-center mb-4">
+<div class="w-8 h-8 flex items-center justify-center bg-secondary/20 rounded-full mr-3">
+<i class="ri-sun-line text-secondary"></i>
+</div>
+<h4 class="text-xl font-medium text-gray-800">时辰养生导航</h4>
+</div>
+<div class="bg-gray-50 p-5 rounded-xl">
+<div class="flex justify-between items-center mb-6">
+<div>
+<h5 class="text-lg font-medium text-gray-800">当前时辰：未时</h5>
+<p class="text-sm text-gray-500">13:00 - 15:00</p>
+</div>
+<div class="w-16 h-16 flex items-center justify-center bg-secondary/20 rounded-full">
+<i class="ri-sun-foggy-line text-secondary text-2xl"></i>
+</div>
+</div>
+<div class="bg-white p-4 rounded-lg shadow-sm mb-6">
+<h5 class="font-medium text-gray-800 mb-3">推荐音乐：《高山流水》</h5>
+<p class="text-sm text-gray-600 mb-4">未时五行为土，此时聆听《高山流水》有助于健脾化痰，稳定气机。</p>
+<div class="flex items-center space-x-3 mb-3">
+<button class="w-10 h-10 flex items-center justify-center bg-primary rounded-full text-white">
+<i class="ri-play-fill text-xl"></i>
+</button>
+<div class="flex-grow">
+<input type="range" class="w-full h-2 bg-gray-200 rounded-full music-player appearance-none">
+</div>
+<span class="text-sm text-gray-500">3:45</span>
+</div>
+<div class="flex justify-between text-sm text-gray-500">
+<span>音调：宫音</span>
+<span>五行：土</span>
+<span>对应脏腑：脾</span>
+</div>
+</div>
+<h5 class="font-medium text-gray-800 mb-3">今日推荐音乐</h5>
+<div class="space-y-2">
+<div class="flex justify-between items-center p-2 hover:bg-white rounded">
+<div class="flex items-center">
+<div class="w-8 h-8 flex items-center justify-center bg-primary/10 rounded-full mr-3">
+<i class="ri-music-fill text-primary"></i>
+</div>
+<div>
+<p class="font-medium">《五行平衡》</p>
+<p class="text-xs text-gray-500">调理五脏功能</p>
+</div>
+</div>
+<span class="text-sm text-gray-500">5:20</span>
+</div>
+<div class="flex justify-between items-center p-2 hover:bg-white rounded">
+<div class="flex items-center">
+<div class="w-8 h-8 flex items-center justify-center bg-primary/10 rounded-full mr-3">
+<i class="ri-music-fill text-primary"></i>
+</div>
+<div>
+<p class="font-medium">《春风徐来》</p>
+<p class="text-xs text-gray-500">疏肝理气</p>
+</div>
+</div>
+<span class="text-sm text-gray-500">4:15</span>
+</div>
+<div class="flex justify-between items-center p-2 hover:bg-white rounded">
+<div class="flex items-center">
+<div class="w-8 h-8 flex items-center justify-center bg-primary/10 rounded-full mr-3">
+<i class="ri-music-fill text-primary"></i>
+</div>
+<div>
+<p class="font-medium">《静心冥想》</p>
+<p class="text-xs text-gray-500">安神助眠</p>
+</div>
+</div>
+<span class="text-sm text-gray-500">10:30</span>
+</div>
+</div>
+</div>
+</div>
+<!-- AI辩证诊室 -->
+<div>
+<div class="flex items-center mb-4">
+<div class="w-8 h-8 flex items-center justify-center bg-secondary/20 rounded-full mr-3">
+<i class="ri-robot-line text-secondary"></i>
+</div>
+<h4 class="text-xl font-medium text-gray-800">AI辩证诊室</h4>
+</div>
+<div class="bg-gray-50 p-5 rounded-xl">
+<div class="bg-white p-4 rounded-lg shadow-sm mb-4 h-64 overflow-y-auto">
+<div class="flex mb-4">
+<div class="w-8 h-8 flex items-center justify-center bg-primary/10 rounded-full mr-3 flex-shrink-0">
+<i class="ri-robot-line text-primary"></i>
+</div>
+<div class="bg-gray-100 p-3 rounded-lg rounded-tl-none max-w-[80%]">
+<p class="text-gray-800">您好，我是您的AI中医辩证助手。请描述您的症状，我将为您提供初步的中医辩证分析。</p>
+</div>
+</div>
+<div class="flex justify-end mb-4">
+<div class="bg-primary/10 p-3 rounded-lg rounded-tr-none max-w-[80%]">
+<p class="text-gray-800">最近总是感到疲倦乏力，食欲不振，睡眠质量也不好，经常半夜醒来。</p>
+</div>
+<div class="w-8 h-8 flex items-center justify-center bg-secondary/20 rounded-full ml-3 flex-shrink-0">
+<i class="ri-user-line text-secondary"></i>
+</div>
+</div>
+<div class="flex mb-4">
+<div class="w-8 h-8 flex items-center justify-center bg-primary/10 rounded-full mr-3 flex-shrink-0">
+<i class="ri-robot-line text-primary"></i>
+</div>
+<div class="bg-gray-100 p-3 rounded-lg rounded-tl-none max-w-[80%]">
+<p class="text-gray-800">根据您描述的症状，从中医角度分析，您可能存在脾胃虚弱、气血不足的情况。请问您的舌苔是什么颜色？是否有口干或口苦的感觉？</p>
+</div>
+</div>
+</div>
+<div class="flex">
+<input type="text" placeholder="请输入您的症状或问题..." class="flex-grow px-4 py-2 border-none focus:outline-none focus:ring-2 focus:ring-primary rounded-l-lg">
+<button class="px-4 py-2 bg-primary text-white !rounded-r-button !rounded-l-none whitespace-nowrap">发送</button>
+</div>
+<div class="mt-4 text-center">
+<p class="text-xs text-gray-500">AI辩证仅供参考，如有严重症状请及时就医</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- 底部信息 -->
+<div class="text-center text-gray-500 text-sm mt-16">
+<p>五音康护云 © 2025 版权所有 | 中医五音疗法数字化平台</p>
+<p class="mt-2">结合传统中医理论与现代科技，守护您的身心健康</p>
+</div>
+</div>
+</div>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+const enterBtn = document.getElementById('enter-btn');
+const mainContent = document.getElementById('main-content');
+enterBtn.addEventListener('click', function() {
+document.querySelector('.min-h-screen').classList.add('hidden');
+mainContent.classList.remove('hidden');
+});
+});
+</script>
+</body>
+</html>
